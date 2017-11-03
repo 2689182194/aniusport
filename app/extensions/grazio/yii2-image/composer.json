@@ -1,0 +1,21 @@
+{
+    "name": "grazio/yii2-image",
+    "description": "grazio image assets for grazio cms",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","cms","image","backend","admin"],
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "admin",
+            "email": "zhanggeqian@miinno.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "grazio\\image\\": ""
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "name": "grazio/yii2-spotlights",
+    "description": "grazio spotlights assets grazio cms",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","cms","spotlights","backend","admin"],
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "admin",
+            "email": "zhanggeqian@miinno.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "grazio\\spotlights\\": ""
+        }
+    }
+}

@@ -1,0 +1,38 @@
+.nav-tabs li {
+    width: 50%
+}
+
+#add {
+    width: 50px;
+    float: none;
+    margin: 0 auto;
+    display: block;
+}
+
+.signup-bg {
+    background-color: #fff;
+    margin-bottom: -50px;
+}
+
+.signup-z-index {
+    z-index: 9;
+}
+
+.member-menu-signup {
+    margin: 50px 0;
+}
+
+.member-menu-signup span {
+    font-weight: bold;
+}
+.num {
+    float: left;
+    line-height: 34px;
+}
+.entry-btn {
+    background-color: #484a7d;
+    color: #fff;
+    margin: 0 auto;
+    display: block;
+    width: 100px;
+}

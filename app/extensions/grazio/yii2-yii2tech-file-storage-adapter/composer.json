@@ -1,0 +1,25 @@
+{
+    "name": "grazio/yii2-yii2tech-file-storage-adapter",
+    "description": "yii2-yii2tech-file-storage-adapter for other cloud",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "ezsky",
+            "email": "ezsky@grazio.org"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "yii2tech/file-storage": "*"
+    },
+    "conflict": {
+        "qiniu/php-sdk": "<7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "grazio\\yii2tech\\filestorage\\": ""
+        }
+    }
+}

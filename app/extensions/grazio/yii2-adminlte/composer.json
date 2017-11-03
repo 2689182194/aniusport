@@ -1,0 +1,24 @@
+{
+    "name": "grazio/yii2-adminlte",
+    "description": "grazio adminlte assets for grazio cms",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","cms","adminlte","backend","admin"],
+    "license": "BSD-4-Clause",
+    "authors": [
+        {
+            "name": "ezsky",
+            "email": "ezsky@grazio.org"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "yiisoft/yii2-bootstrap": "2.*",
+        "cebe/yii2-gravatar": "1.*",
+        "rmrevin/yii2-fontawesome": "~2.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "grazio\\adminlte\\": ""
+        }
+    }
+}

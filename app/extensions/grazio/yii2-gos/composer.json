@@ -1,0 +1,23 @@
+{
+    "name": "grazio/yii2-gos",
+    "description": "grazio object storage for grazio cms",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","cms","file","storage","object storage"],
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "ezsky",
+            "email": "ezsky@grazio.org"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "yii2tech/ar-file": "*",
+        "grazio/yii2-yii2tech-file-storage-adapter":"*"
+    },
+    "autoload": {
+        "psr-4": {
+            "grazio\\gos\\": ""
+        }
+    }
+}

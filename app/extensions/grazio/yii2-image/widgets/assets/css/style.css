@@ -1,0 +1,40 @@
+
+.miinnoFormImageInput{
+    height: 160px;
+}
+.miinnoFormImageInput .upload{
+    float: left;
+    border:1px solid #d8dde6;
+    background-color: #eee;
+}
+.miinnoFormImageInput .upload img{
+    max-height: 150px;
+}
+.miinnoFormImageInput .main{
+    float: left;
+    margin-left: 25px;
+}
+.miinnoFormImageInput .main p{
+    margin-bottom:10px;
+}
+.miinnoFormImageInput .main span{
+    color: #2da5ee;
+}
+.miinnoFormImageInput .main .pass{
+    position: relative;
+    margin-bottom: 10px;
+}
+.miinnoFormImageInput .main .pass a{
+    margin: 0;
+}
+.miinnoFormImageInput .main .pass input{
+    position: absolute;
+    top:0;
+    font-size: 14px;
+    padding: 0 20px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 5px;
+    width:97px;
+    opacity: 0;
+}

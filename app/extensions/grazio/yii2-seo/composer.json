@@ -1,0 +1,21 @@
+{
+    "name": "grazio/yii2-seo",
+    "description": "seo manager",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "ezsky",
+            "email": "ezsky@grazio.org"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "grazio\\seo\\": ""
+        }
+    }
+}

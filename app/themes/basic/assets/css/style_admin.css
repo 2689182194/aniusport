@@ -1,0 +1,13 @@
+.project-view table th,
+.contact-view table th,
+.news-view table th,
+.talk-view table th
+{
+    text-align: right;    
+}
+
+.project-view table td img{
+    height: 80px;
+    margin-right: 8px;
+}
+
