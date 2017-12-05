@@ -4,7 +4,7 @@ namespace grazio\main\models;
 
 use Yii;
 use yii\base\Model;
-use clcnzyz\member\models\Member;
+use dacity\member\models\Member;
 
 /**
  * LoginForm is the model behind the login form.
@@ -15,6 +15,8 @@ class LoginForm extends Model {
     public $password;
     public $rememberMe = true;
     private $_user = false;
+    public $verifyCode;
+    public $verifyCodeImage;
 
     /**
      * @return array the validation rules.
@@ -27,6 +29,7 @@ class LoginForm extends Model {
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            ['verifyCode', 'captcha', 'captchaAction' => '/main/default/captcha'],
         ];
     }
 

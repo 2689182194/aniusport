@@ -1,6 +1,6 @@
 <?php
 
-namespace grazio\main\models;
+namespace app\modules\main\models;
 
 class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {

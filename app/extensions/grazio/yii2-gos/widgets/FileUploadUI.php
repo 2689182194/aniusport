@@ -86,18 +86,20 @@ class FileUploadUI extends \dosamigos\fileupload\FileUploadUI
         if ($this->loadExistingFiles) {
             $loadExistingFilesUrl = Url::to($this->loadExistingFiles);
             $view->registerJs("
-            
+                var gosFileIds = jQuery('#$inputId').val();
                 $('#$id').addClass('fileupload-processing');
-                $.ajax({
-                    url: '{$loadExistingFilesUrl}',
-                    dataType: 'json',
-                    data:{ids:jQuery('#$inputId').val()},
-                    context: $('#$id')[0]
-                }).always(function () {
-                    $(this).removeClass('fileupload-processing');
-                }).done(function (result) {
-                    $(this).fileupload('option', 'done').call(this, $.Event('done'), {result: result});
-                });
+                if (gosFileIds !== ''){
+                    $.ajax({
+                        url: '{$loadExistingFilesUrl}',
+                        dataType: 'json',
+                        data:{ids:gosFileIds},
+                        context: $('#$id')[0]
+                    }).always(function () {
+                        $(this).removeClass('fileupload-processing');
+                    }).done(function (result) {
+                        $(this).fileupload('option', 'done').call(this, $.Event('done'), {result: result});
+                    });
+                };
             ");
         }
     }

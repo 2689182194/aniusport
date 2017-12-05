@@ -20,13 +20,13 @@ use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
 
-class FileUploadCallbackBehavior extends Behavior
+class ImageUploadCallbackBehavior extends Behavior
 {
 
     public $deleteFile = true;
     public $recognitionFile = true;
-    public $filesAttribute = 'attachment';
-    public $fileItemModelClass = '\grazio\gos\models\FileItemModel';
+    public $filesAttribute = 'image';
+    public $fileItemModelClass = '\grazio\gos\models\ImageItemModel';
     private $fileItemModel;
 
     /**
@@ -49,7 +49,7 @@ class FileUploadCallbackBehavior extends Behavior
     {
         $owner = $this->owner;
         $fileItemModel = $this->ensureFileItemModel();
-        $fileItemModel::updateAll(['source_id' => $owner->id], ['id' => explode(',', $owner->getAttribute($this->filesAttribute))]);
+        $fileItemModel::updateAll(['source_id' => $owner->id], ['id' => $owner->getAttribute($this->filesAttribute)]);
     }
 
     /**
@@ -59,9 +59,9 @@ class FileUploadCallbackBehavior extends Behavior
     {
         $owner = $this->owner;
         $fileItemModel = $this->ensureFileItemModel();
-        $models = $fileItemModel->find()->where(['id' => explode(',', $owner->getAttribute($this->filesAttribute))])->all();
+        $models = $fileItemModel->find()->where(['id' => $owner->getAttribute($this->filesAttribute)])->one();
         if ($models !== null) {
-            $attributes = [$this->filesAttribute => implode(',', ArrayHelper::getColumn($models, 'id'))];
+            $attributes = [$this->filesAttribute => $models->id];
             $owner->updateAttributes($attributes);
         }
     }
@@ -73,7 +73,7 @@ class FileUploadCallbackBehavior extends Behavior
     {
         $owner = $this->owner;
         $fileItemModel = $this->ensureFileItemModel();
-        $fileItemModel::deleteAll(['id' => explode(',', $owner->getAttribute($this->filesAttribute))]);
+        $fileItemModel::deleteAll(['id' => $owner->getAttribute($this->filesAttribute)]);
     }
     // Events:
 

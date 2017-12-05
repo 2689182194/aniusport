@@ -2,25 +2,166 @@
 
 namespace grazio\main\web\controllers;
 
-use Yii;
 use grazio\core\components\WebController;
-use yii\web\NotFoundHttpException;
-
+use Yii;
+use yii\filters\AccessControl;
+use yii\web\Controller;
+use yii\filters\VerbFilter;
+use grazio\main\models\LoginForm;
+use app\modules\main\models\ContactForm;
+use dacity\member\models\Member;
 
 class DefaultController extends WebController
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post', 'get'],
+                ],
+            ],
+        ];
+    }
 
+    /**
+     * @inheritdoc
+     */
     public function actions()
     {
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'minLength' => 4,
+                'maxLength' => 4,
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+            ],
         ];
     }
 
+    /**
+     * Displays homepage.
+     *
+     * @return string
+     */
     public function actionIndex()
     {
-        echo 111;die;
+        return $this->render('index', [
+        ]);
+    }
+
+    public function actionSignup()
+    {
+        $model = new Member();
+        $result = Yii::$app->request->post();
+
+        if ($model->load($result)) {
+            $model->authKey = $model->generateAuthKey();
+            $model->password = $model->setPassword($model->password);
+            $model->confirmpwd = $model->setPassword($model->confirmpwd);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if ($errors = \yii\widgets\ActiveForm::validate($model)) {
+
+                return $errors;
+            }
+            if ($model->save()) {
+                return $this->redirect(['login']);
+                //得到上次插入的Insert id
+                //$use_id = $model->attributes['id'];
+                //$user = $model->findIdentity($use_id);
+
+//                if (Yii::$app->getUser()->login($user)) {
+//
+//                    return $this->goBack();
+//                }
+
+            } else {
+                return $this->render('signup', [
+                    'model' => $errors,
+                ]);
+            }
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Login action.
+     *
+     * @return string
+     */
+    public function actionLogin()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+        return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Logout action.
+     *
+     * @return string
+     */
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
+    }
+
+    /**
+     * Displays contact page.
+     *
+     * @return string
+     */
+    public function actionContact()
+    {
+        $model = new ContactForm();
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+
+            return $this->refresh();
+        }
+        return $this->render('contact', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionAbout()
+    {
+        return $this->render('about');
     }
 }

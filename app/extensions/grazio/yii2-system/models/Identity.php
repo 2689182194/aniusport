@@ -335,20 +335,20 @@ abstract class Identity extends ActiveRecord implements IdentityInterface
     public static function statusList()
     {
         return [
-            Self::STATUS_ACTIVE => [
-                'id'=> Self::STATUS_ACTIVE ,
+            self::STATUS_ACTIVE => [
+                'id'=> self::STATUS_ACTIVE ,
                 'name' => Yii::t('status', 'Active')
             ],
-            Self::STATUS_SUSPENDED => [
-                'id'=> Self::STATUS_SUSPENDED ,
+            self::STATUS_SUSPENDED => [
+                'id'=> self::STATUS_SUSPENDED ,
                 'name' => Yii::t('status', 'Suspended')
             ],
-            Self::STATUS_PENDING => [
-                'id'=> Self::STATUS_PENDING ,
+            self::STATUS_PENDING => [
+                'id'=> self::STATUS_PENDING ,
                 'name' => Yii::t('status', 'Pending')
             ],
-            Self::STATUS_DELETED => [
-                'id'=> Self::STATUS_DELETED ,
+            self::STATUS_DELETED => [
+                'id'=> self::STATUS_DELETED ,
                 'name' => Yii::t('status', 'Deleted')
             ],
         ];

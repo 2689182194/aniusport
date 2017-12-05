@@ -28,7 +28,14 @@ class ImageController extends WebController
             ],
         ];
     }
-
+    public function actions()
+    {
+        return [
+            'upload' => 'grazio\gos\actions\ImageUploadAction',
+            'delete' => 'grazio\gos\actions\DeleteAction',
+            'fetch' => 'grazio\gos\actions\FetchAction'
+        ];
+    }
     /**
      * Lists all MediaItemModel models.
      * @return mixed

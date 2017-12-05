@@ -48,8 +48,8 @@ class FileItemModel extends GosItemModel
         return [
             'file' => [
                 'class' => FileBehavior::className(),
-                'fileStorageBucket' => 'grazio',
-                'subDirTemplate' => 'gos/file/{^^pk}/{^pk}',
+                'fileStorageBucket' => 'files',
+                'subDirTemplate' => '{^^pk}/{^pk}',
                 'fileExtensionAttribute' => 'file_extension',
                 'fileVersionAttribute' => 'file_version',
             ],

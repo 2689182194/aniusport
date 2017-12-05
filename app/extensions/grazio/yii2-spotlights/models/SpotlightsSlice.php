@@ -43,18 +43,7 @@ class SpotlightsSlice extends ActiveRecord
     public function behaviors()
     {
         return [
-            [
-                'class' => SearchIndexBehavior::className(),
-                'key' => 'id',
-                'route' => '',
-                'title' => 'title',
-                'summary' => 'description',
-                'indexText' => function ($model) {
-                    $text[] = $model->title;
-                    $text[] = $model->description;
-                    return implode(',', $text);
-                },
-            ],
+
             [
                 'class' => \grazio\image\behaviors\UploadImageBehavior::className(),
                 'attributes' => ['file', 'banner']

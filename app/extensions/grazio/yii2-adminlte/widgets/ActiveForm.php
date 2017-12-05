@@ -15,6 +15,8 @@ class ActiveForm extends \yii\widgets\ActiveForm
 {
     public $boxOptions = false;
     public $type = false;
+    public $fieldClass = 'grazio\adminlte\widgets\ActiveField';
+
 
     public function init()
     {

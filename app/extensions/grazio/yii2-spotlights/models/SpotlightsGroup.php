@@ -34,18 +34,6 @@ class SpotlightsGroup extends ActiveRecord
     {
         return [
             [
-                'class' => SearchIndexBehavior::className(),
-                'key' => 'group_id',
-                'route' => '',
-                'title' => 'name',
-                'summary' => 'description',
-                'indexText' => function ($model) {
-                    $text[] = $model->name;
-                    $text[] = $model->description;
-                    return implode(',', $text);
-                },
-            ],
-            [
                 'class' => TimestampBehavior::className(),
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],

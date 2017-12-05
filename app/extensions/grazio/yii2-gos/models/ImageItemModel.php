@@ -1,10 +1,10 @@
 <?php
 
-namespace grazio\gos\web\models;
+namespace grazio\gos\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
-use yii2tech\ar\file\ImageFileBehavior;
+use yii2tech\ar\file\FileBehavior;
 
 /**
  * This is the model class for table "media_item".
@@ -35,15 +35,11 @@ class ImageItemModel extends GosItemModel
     {
         return [
             'file' => [
-                'class' => ImageFileBehavior::className(),
+                'class' => FileBehavior::className(),
                 'fileStorageBucket' => 'images',
+                'subDirTemplate' => '{^^pk}/{^pk}/{pk}',
                 'fileExtensionAttribute' => 'file_extension',
                 'fileVersionAttribute' => 'file_version',
-                'fileTransformations' => [
-                    'origin', // no resize
-                    'main' => [800, 600], // width = 800px, height = 600px
-                    'thumbnail' => [100, 80], // width = 100px, height = 80px
-                ],
             ],
         ];
     }
