@@ -25,6 +25,9 @@ use yii\web\NotFoundHttpException;
  */
 class SportsUser extends \yii\db\ActiveRecord
 {
+    const MAN = 1;
+//    const STATUS_DELETED = 'DELETED';
+    const WOMAN = 2;
     /**
      * @inheritdoc
      */
@@ -45,7 +48,18 @@ class SportsUser extends \yii\db\ActiveRecord
             ],
         ];
     }
+    /**
+     * @return string
+     */
+    public static function status()
+    {
+        return [
 
+            self::MAN => ['name' => '男', 'htmlClass' => 'label-success'],
+//            self::STATUS_OFFLINE => ['name' => '待定', 'htmlClass' => ' label-danger'],
+            self::WOMAN => ['name' => '女', 'htmlClass' => 'label-info']
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -68,17 +82,17 @@ class SportsUser extends \yii\db\ActiveRecord
             'id' => 'ID',
             'authKey' => 'Auth Key',
             'openid' => 'Openid',
-            'nickname' => 'Nickname',
-            'gender' => 'Gender',
-            'avatarUrl' => 'Avatar Url',
-            'country' => 'Country',
-            'province' => 'Province',
+            'nickname' => '昵称',
+            'gender' => '性别',
+            'avatarUrl' => '图像',
+            'country' => '国家',
+            'province' => '省',
             'ip' => 'Ip',
-            'city' => 'City',
-            'badge' =>'Badge',
-            'scores' => 'Scores',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'city' => '城市',
+            'badge' =>'徽章数量',
+            'scores' => '丸数量',
+            'created_at' => '创建时间',
+            'updated_at' => '修改时间',
         ];
     }
 
@@ -99,7 +113,6 @@ class SportsUser extends \yii\db\ActiveRecord
      */
     public static function Register($data, $openId)
     {
-
         $userInfo = User::findIdentity($openId);
         if (empty($userInfo)) {
             $model = new SportsUser();

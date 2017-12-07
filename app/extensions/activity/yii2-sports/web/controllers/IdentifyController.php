@@ -10,9 +10,10 @@ namespace activity\sports\web\controllers;
 
 use activity\sports\models\SportsActivity;
 use activity\sports\models\SportsSign;
+use activity\sports\models\SportsSignDate;
 use Yii;
 use yii\helpers\Json;
-use yii\web\Controller;
+use yii\rest\Controller;
 use activity\decrypt\sdk\WXBizDataCrypt;
 use yii\web\NotFoundHttpException;
 
@@ -53,25 +54,23 @@ class IdentifyController extends Controller
                 'expire_time' => time() + 3600 * 24, //这里设置24小时过期
                 'unquie_user' => $js_result['openid'],
             ];
-            $session = Yii::$app->session;
-            $session['identification'] = $identification;
+//            $session = Yii::$app->session;
+//            $session['identification'] = $identification;
 
-//            $cache = Yii::$app->cache;
-//            $cache->set('identification', $identification);
-//
-//            $session = $cache->get('identification');
+            $result_data = self::encryption($identification);
+
+            $result_data = unserialize($result_data);
 
             //判断今日是否签到
             $todayBegin = strtotime(date('Y-m-d') . " 00:00:00");
             $todayEnd = strtotime(date('Y-m-d') . " 23:59:59");
-            $firstSign = SportsSign::IsSign($todayBegin, $todayEnd, $js_result['openid']);
-
+            $firstSign = SportsSignDate::IsSign($todayBegin, $todayEnd, $js_result['openid']);
             if ($errCode == 0) {
                 $result = [
                     'code' => 0,
                     'openid' => $js_result['openid'],
-                    'identification' => $session['identification']['title'],
-//                    'identification' => $session['title'],
+                    //'identification' => $session['identification']['title'],
+                    'identification' => $result_data['title'],
                     'stepInfoList' => $data,
                     'firstSign' => $firstSign ? 1 : 0,
                 ];
@@ -81,9 +80,11 @@ class IdentifyController extends Controller
                 ];
             }
         }
-        $result = Json::encode($result);
 
         return $result;
+//        $result = Json::encode($result);
+//
+//        return $result;
 
     }
 
@@ -121,17 +122,29 @@ class IdentifyController extends Controller
      */
     public static function Identification($identification)
     {
-//        echo $identification;die;
-//        $cache = Yii::$app->cache;
-//
-//        $session = $cache->get('identification');
-//        \X::result($session);
-//
-//        if ($session['title'] == $identification) {
-//            $openId = $session['unquie_user'];
-//        }
         $openId = substr($identification, 24);
         //\X::result($openId);die;
         return $openId;
     }
+
+    /**
+     * 小程序与服务器进行的登录验证
+     * @param $identification
+     * @return bool|string
+     */
+    public static function encryption($identification)
+    {
+        $redis = Yii::$app->redis;
+        //$redis = $redis->flushdb();
+        $result_data = $redis->get($identification['title']);
+        if ($result_data === null) {
+            $redis->set($identification['title'], serialize($identification));  //设置redis缓存
+            $redis->expire($identification['title'], 3600 * 24 * 30);
+
+            return serialize($identification);
+        }
+
+        return $result_data;
+    }
+
 }

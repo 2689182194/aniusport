@@ -55,12 +55,12 @@ class SportsSign extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'sign_id' => 'Sign ID',
-            'sign_day' => 'Sign Day',
-            'sign_time' => 'Sign Time',
-            'sign_user' => 'Sign User',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'sign_id' => 'id',
+            'sign_day' => '连续签到天数',
+            'sign_time' => '签到时间',
+            'sign_user' => '签到用户',
+            'created_at' => '创建时间',
+            'updated_at' => '修改时间',
         ];
     }
 
@@ -123,5 +123,10 @@ class SportsSign extends \yii\db\ActiveRecord
         }
 
         return $result;
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(SportsUser::className(), ['openid' => 'sign_user']);
     }
 }

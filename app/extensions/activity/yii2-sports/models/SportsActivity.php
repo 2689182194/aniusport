@@ -51,6 +51,5 @@ class SportsActivity extends \yii\db\ActiveRecord
     {
         $active = static::find()->select(['activity_id', 'activity_name'])->asArray()->all();
         return ArrayHelper::map($active, 'activity_id', 'activity_name');
-
     }
 }

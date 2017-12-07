@@ -5,7 +5,6 @@ namespace activity\anniu\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use activity\anniu\models\Group;
 
 /**
  * GroupSearch represents the model behind the search form about `activity\anniu\models\Group`.

@@ -19,12 +19,17 @@ use yii\helpers\ArrayHelper;
  */
 class Group extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%group}}';
+        return '{{%anniuwenzhen_group}}';
+    }
+    public static function getDb()
+    {
+        return Yii::$app->get('db1');
     }
 
     public function behaviors()

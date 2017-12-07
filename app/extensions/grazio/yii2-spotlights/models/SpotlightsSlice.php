@@ -2,12 +2,15 @@
 
 namespace grazio\spotlights\models;
 
+use grazio\image\helpers\ImageHelper;
+use GuzzleHttp\Psr7\UploadedFile;
 use Yii;
+use yii\bootstrap\Html;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii2tech\ar\softdelete\SoftDeleteBehavior;
-use clcnst\search\behaviors\SearchIndexBehavior;
+use yii\helpers\ArrayHelper;
 use grazio\system\models\Admin;
 
 /**
@@ -46,7 +49,7 @@ class SpotlightsSlice extends ActiveRecord
 
             [
                 'class' => \grazio\image\behaviors\UploadImageBehavior::className(),
-                'attributes' => ['file', 'banner']
+                'attributes' => ['banner']
             ],
             [
                 'class' => TimestampBehavior::className(),
@@ -112,7 +115,19 @@ class SpotlightsSlice extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%spotlights_slice}}';
+        return '{{%sports_spotlights_slice}}';
+    }
+
+    public function fields()
+    {
+        $extra = [
+            'banner' => function ($model) {
+                return $model->banner ?  Yii::$app->params['image_link'] . ImageHelper::src($model->banner) : '';
+            },
+            'title'
+        ];
+
+        return $extra;
     }
 
     public function scenarios()
@@ -135,10 +150,10 @@ class SpotlightsSlice extends ActiveRecord
             [['end_at', 'weight', 'flag'], 'default', 'value' => 0],
             ['description', 'default', 'value' => ''],
             [['title', 'link'], 'string', 'max' => 200],
-            [['file', 'banner'], 'image', 'extensions' => 'png, jpg',
-                'minWidth' => 64, 'maxWidth' => 1920,
-                'minHeight' => 64, 'maxHeight' => 1080,
-                'maxSize' => 800 * 1024,
+            [['banner'], 'image', 'extensions' => 'png, jpg',
+//                'minWidth' => 64, 'maxWidth' => 1920,
+//                'minHeight' => 64, 'maxHeight' => 1080,
+//                'maxSize' => 800 * 1024,
                 'enableClientValidation' => true,
                 'tooBig' => '上传文件不能大于{formattedLimit}'
             ],

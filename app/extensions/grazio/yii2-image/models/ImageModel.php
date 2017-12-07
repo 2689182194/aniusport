@@ -22,7 +22,7 @@ class ImageModel extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%core_image}}';
+        return '{{%sports_core_image}}';
     }
 
     /**

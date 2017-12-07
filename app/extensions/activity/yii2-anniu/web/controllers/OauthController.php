@@ -25,9 +25,9 @@ class OauthController extends Controller
     public function actionIndex($open_id = '',$forword)
     {
         $openId = $open_id;
-//        if (YII_ENV_DEV) {
-//            $openId = 'o_P7SwLw3vgSa9dhkgHMDiaDskqk';
-//        }
+        if (YII_ENV_DEV) {
+            $openId = 'o_P7SwLw3vgSa9dhkgHMDiaDskqk';
+        }
         if (empty($openId)) {
             return $this->redirect(Yii::$app->exchange->getOauthUrl(urlencode(Url::current(['forword'=>$forword], true))));
         } else {

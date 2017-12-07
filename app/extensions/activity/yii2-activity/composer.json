@@ -1,0 +1,21 @@
+{
+    "name": "trt/yii2-store",
+    "description": "store of trt",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "miinno",
+            "email": "info@miinno.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "trt\\store\\": ""
+        }
+    }
+}

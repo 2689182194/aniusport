@@ -38,11 +38,6 @@ use grazio\image\widgets\ImageInput;
 
     <?= $form->field($model, 'weight')->textInput() ?>
 
-    <?= $form->field($model, 'file')->widget(ImageInput::className(), [
-        'hintFileSize' => '500KB',
-        'hintImageSize' => '400px*400px',
-        'hintExtensions' => 'png,jpg',
-    ]) ?>
     <?php $arr = SpotlightsGroup::Group() ?>
     <?= $form->field($model, 'flag')->radioList([1=>'显示',0=>'隐藏']) ?>
 

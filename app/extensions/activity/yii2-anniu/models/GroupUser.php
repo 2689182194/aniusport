@@ -16,14 +16,19 @@ use yii\db\ActiveRecord;
  */
 class GroupUser extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%group_user}}';
+        return '{{%anniuwenzhen_group_user}}';
     }
 
+    public static function getDb()
+    {
+        return Yii::$app->get('db1');
+    }
     /**
      * @inheritdoc
      */

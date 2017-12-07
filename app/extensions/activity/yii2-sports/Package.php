@@ -6,12 +6,12 @@
  * Time: 下午10:24
  */
 
-namespace activity\anniu;
+namespace activity\sports;
 
 class Package extends \grazio\core\package\Package
 {
 
-    public $name = 'anniu';
+    public $name = 'sports';
 
     public function getWebModule()
     {

@@ -12,7 +12,7 @@ use Yii;
 use activity\sports\models\SportsScores;
 use activity\sports\models\User;
 use yii\helpers\Json;
-use yii\web\Controller;
+use yii\rest\Controller;
 
 class MyController extends Controller
 {
@@ -24,42 +24,31 @@ class MyController extends Controller
     //        }
         }*/
 
-    public function actionIndex()
-    {
-        $openid = 'oZJcc0WwhZWuLFfeN-ETjLOwvcxI';
-
-        $userData = User::findIdentity($openid);
-        $data['badge'] = $userData->badge;
-        $data['scores'] = $userData->scores;
-
-        return Json::encode($data);
-    }
-
     /**
      * 徽章和积分总数查询
      * 有关用户的积分记录
-     * @return string
+     * @param string $identification 约定参数
+     * @return array
      */
     public function actionScoreRecord($identification = '')
     {
-        $cache = Yii::$app->cache;
-
-        $session = $cache->get('identification');
-        \X::result($session);die;
-//        $openid = IdentifyController::Identification($identification);
-        $openid = 'oZJcc0WwhZWuLFfeN-ETjLOwvcxI';
+        //$openid = IdentifyController::Identification($identification);
+        $openid = User::Identification($identification);
+        //$openid = 'oZJcc0WwhZWuLFfeN-ETjLOwvcxI';
         $userData = User::findIdentity($openid);
-
-        $total['badge'] = $userData->badge;
-        $total['scores'] = $userData->scores;
-
+        if ($userData) {
+            $total['badge'] = $userData->badge;
+            $total['scores'] = $userData->scores;
+        }
         $data = SportsScores::ScoreRecord($openid);
 
         $result = [
-            'total' => $total,
+            'total' => isset($total) ? $total : '',
             'data' => $data
         ];
 
-        return Json::encode($result);
+        return $result;
+
+        //return Json::encode($result);
     }
 }

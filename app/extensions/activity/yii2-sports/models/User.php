@@ -14,7 +14,7 @@ class User extends SportsUser implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::find()->where(['openid'=>$id])->one();
+        return static::find()->where(['openid' => $id])->one();
     }
 
 
@@ -25,6 +25,7 @@ class User extends SportsUser implements IdentityInterface
     {
         return $this->openid;
     }
+
     /**
      * @inheritdoc
      */
@@ -57,4 +58,28 @@ class User extends SportsUser implements IdentityInterface
     {
     }
 
+    /**
+     * 约定参数校验
+     * @param $identification
+     * @return string
+     * @throws yii\base\Exception
+     */
+    public static function Identification($identification)
+    {
+
+        $result = Yii::$app->redis->get($identification);   //读取redis缓存
+        $result = unserialize($result);
+//        echo $identification;
+//        \X::result($result);
+//        echo $result['title'];
+//        echo "<br/>";
+//        return $result['unquie_user'];
+        if ($identification == $result['title']) {
+//            echo 1;die;
+            return $result['unquie_user'];
+        } else {
+//            echo 2;die;
+            throw new yii\base\Exception('登录失效');
+        }
+    }
 }

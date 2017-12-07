@@ -1,6 +1,6 @@
 <?php
 
-namespace grazio\spotlight;
+namespace grazio\spotlights;
 
 /**
  * spotlights module definition class

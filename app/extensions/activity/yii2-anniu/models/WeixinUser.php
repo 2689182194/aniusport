@@ -46,14 +46,19 @@ use Yii;
  */
 class WeixinUser extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%weixin_user}}';
+        return '{{%anniuwenzhen_weixin_user}}';
     }
 
+    public static function getDb()
+    {
+        return Yii::$app->get('db1');
+    }
 
     /**
      * @inheritdoc

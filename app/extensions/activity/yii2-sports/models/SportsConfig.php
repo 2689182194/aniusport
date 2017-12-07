@@ -27,6 +27,16 @@ class SportsConfig extends \yii\db\ActiveRecord
         return '{{%sports_config}}';
     }
 
+    public function fields()
+    {
+        return [
+            'id',
+            'praisename',
+            'praisecontent',
+            'praiseimage'
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -35,7 +45,7 @@ class SportsConfig extends \yii\db\ActiveRecord
         return [
             [['praisefeild', 'praisename', 'min', 'max', 'praisecontent', 'praisenumber', 'chance'], 'required'],
             [['praisecontent'], 'string'],
-            [['praisenumber', 'chance'], 'integer'],
+            [['praisenumber', 'chance', 'created_at', 'end_at'], 'integer'],
             [['praisefeild'], 'string', 'max' => 10],
             [['praisename'], 'string', 'max' => 20],
             [['min', 'max'], 'string', 'max' => 100],
@@ -58,6 +68,8 @@ class SportsConfig extends \yii\db\ActiveRecord
             'praisenumber' => 'Praisenumber',
             'praiseimage' => 'Praiseimage',
             'chance' => 'Chance',
+            'created_at' => 'Created At',
+            'end_at' => 'End At'
         ];
     }
 

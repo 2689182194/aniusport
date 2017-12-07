@@ -24,12 +24,18 @@ use yii\helpers\ArrayHelper;
  */
 class Userinfo extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%userinfo}}';
+        return '{{%anniuwenzhen_userinfo}}';
+    }
+
+    public static function getDb()
+    {
+        return Yii::$app->get('db1');
     }
 
     public function behaviors()
@@ -52,7 +58,7 @@ class Userinfo extends \yii\db\ActiveRecord
     {
         return [
             [['openid', 'username', 'phone', 'consultdirection'], 'required','message'=>'{attribute}不能为空'],
-            [['openid','phone'], 'unique','message'=>'{attribute}已经存在不能重复使用'],
+            [['phone'], 'unique','message'=>'{attribute}已经存在不能重复使用'],
             [['age', 'created_at'], 'integer'],
             [['username', 'nation', 'openid'], 'string', 'max' => 100],
             ['age', 'default', 'value' => 0],

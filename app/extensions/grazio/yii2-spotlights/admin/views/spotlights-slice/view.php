@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'Html',
                 'headerOptions' => ['width' => '250'],
                 'value' => function ($model) {
-                    return Html::img(ImageHelper::src($model->file), ['width' =>80]);
+                    return Html::img(ImageHelper::src($model->banner), ['width' =>80]);
                 }
             ],
             [

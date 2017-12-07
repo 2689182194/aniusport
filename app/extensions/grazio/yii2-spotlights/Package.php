@@ -8,7 +8,7 @@
 
 namespace grazio\spotlights;
 
-use grazio\spotlight\Module;
+use grazio\spotlights\Module;
 
 class Package extends \grazio\core\package\Package
 {

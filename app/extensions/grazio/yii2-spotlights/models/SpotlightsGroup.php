@@ -89,7 +89,7 @@ class SpotlightsGroup extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%spotlights_group}}';
+        return '{{%sports_spotlights_group}}';
     }
 
     /**

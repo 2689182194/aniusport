@@ -41,14 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::img(ImageHelper::src($model->banner), ['width' =>80]);
                     }
                 ],
-                [
-                    'attribute' => 'file',
-                    'format' => 'Html',
-                    'headerOptions' => ['width' => '250'],
-                    'value' => function ($model) {
-                        return Html::img(ImageHelper::src($model->file), ['width' =>80]);
-                    }
-                ],
+
                 [
                     'class' => '\grazio\adminlte\widgets\StatusColumn',
                     'status' => SpotlightsSlice::flag(),
